@@ -8,7 +8,6 @@ param identityName string
 param containerAppsEnvironmentName string
 param containerRegistryName string
 param serviceName string = 'aca'
-param exists bool
 
 @description('Endpoint for Azure Cosmos DB for NoSQL account.')
 param databaseAccountEndpoint string

@@ -28,7 +28,7 @@ param serviceName string = 'aca'
 // "resourceGroupName": {
 //      "value": "myGroupName"
 // }
-param resourceGroupName string = ''
+// param resourceGroupName string = ''
 
 var abbrs = loadJsonContent('./abbreviations.json')
 
@@ -45,7 +45,7 @@ var resourceToken = toLower(uniqueString(subscription().id, environmentName, loc
 
 // Organize resources in a resource group
 resource rg 'Microsoft.Resources/resourceGroups@2021-04-01' = {
-  name: !empty(resourceGroupName) ? resourceGroupName : '${abbrs.resourcesResourceGroups}${environmentName}'
+  name: 'rg-my-env'
   location: location
   tags: tags
 }
@@ -118,7 +118,7 @@ module containerAppsEnv './core/host/container-apps.bicep' = {
   params: {
     name: 'app'
     containerAppsEnvironmentName: !empty(containerAppsEnvName) ? containerAppsEnvName : '${abbrs.appManagedEnvironments}${resourceToken}'
-    containerRegistryName: !empty(containerRegistryName) ? containerRegistryName : '${abbrs.containerRegistryRegistries}${resourceToken}'
+    containerRegistryName: '${abbrs.containerRegistryRegistries}${resourceToken}'
     location: location
   }
 }
@@ -140,7 +140,6 @@ module web 'app/app.bicep' = {
     location: location
     tags: tags
     serviceName: serviceName
-    exists: false
     identityName: identity.outputs.name
   }
 }
