@@ -17,7 +17,7 @@ param location string
 param principalId string = ''
 
 @description('Flag to decide where to create OpenAI role for current user')
-param createRoleForUser bool = true
+param createRoleForUser bool = false
 
 param storageAccountName string = ''
 param containerAppsEnvName string = ''

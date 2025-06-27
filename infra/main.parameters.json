@@ -12,7 +12,7 @@
         "value": "${AZURE_PRINCIPAL_ID}"
       },
       "createRoleForUser": {
-        "value": "${CREATE_ROLE_FOR_USER=true}"
+        "value": "${CREATE_ROLE_FOR_USER=false}"
       }
     }
 }
