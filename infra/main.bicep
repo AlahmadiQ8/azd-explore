@@ -16,10 +16,12 @@ param location string
 @description('Id of the user or app to assign application roles')
 param principalId string = ''
 
+@description('Flag to decide where to create OpenAI role for current user')Add commentMore actions
+param createRoleForUser bool = true
+
 param storageAccountName string = ''
 param containerAppsEnvName string = ''
 param containerAppsAppName string = ''
-param containerRegistryName string = ''
 
 param serviceName string = 'aca'
 
@@ -90,7 +92,7 @@ module storage './core/storage/storage-account.bicep' = {
 }
 
 // Assign storage blob data contributor to the user for local runs
-module userAssignStorage './core/security/role.bicep' = {
+module userAssignStorage './core/security/role.bicep' = if (createRoleForUser) {
   name: 'assignStorage'
   scope: rg
   params: {
